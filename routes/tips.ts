@@ -35,7 +35,6 @@ tipsRouter.all("/", (req: Request, res: Response) => {
 tipsRouter.get("/:id", (req: Request, res: Response): void => {
     res.setHeader(HTTP_HEADER_NAMES.ALLOW, 'GET'); //Tell client valid request methods for this route
     res.setHeader(HTTP_HEADER_NAMES.CONTENT_TYPE, 'application/raw'); //Set the content type to json
-    res.setHeader(HTTP_HEADER_NAMES.CACHE_CONTROL, 'public, maxAge=3600'); //HTTP 1.1
     res.setHeader(HTTP_HEADER_NAMES.LAST_MODIFIED, new Date(1696523590).toUTCString()); //last modified now
 
     res.status(HTTP_STATUS_CODES.OK); //Set the status code
@@ -44,10 +43,12 @@ tipsRouter.get("/:id", (req: Request, res: Response): void => {
     const tip = tipsData.tips[parseInt(req.params.id, 10) - 1];
 
     if (tip == null) {
+        res.setHeader(HTTP_HEADER_NAMES.CACHE_CONTROL, 'private, no-cache, no-store, must-revalidate'); //HTTP 1.1
         res.status(HTTP_STATUS_CODES.NOT_FOUND);
         res.send();
     }
     else {
+        res.setHeader(HTTP_HEADER_NAMES.CACHE_CONTROL, 'public, maxAge=3600'); //HTTP 1.1
         res.json(tip);
         res.send();
     }
