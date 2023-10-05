@@ -122,6 +122,7 @@ export const HTTP_HEADER_NAMES = {
     X_FORWARDED_PROTO: 'X-Forwarded-Proto',
     X_FRAME_OPTIONS: 'X-Frame-Options',
     X_POWERED_BY: 'X-Powered-By',
+    X_RATE_LIMIT_RESET: 'X-Rate-Limit-Reset',
     X_WITH_Reason: 'X-With-Reason',
     X_XSS_PROTECTION: 'X-XSS-Protection'
 }
